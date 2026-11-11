@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>게시글 상세 · 캠퍼스 리마켓</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<nav th:replace="~{common/nav :: navigation}"></nav>
+<main>
+    <h1 th:text="${dto.title}">게시글 상세</h1>
+    <dl>
+        <dt>분류</dt><dd th:text="${dto.categoryName}"></dd>
+        <dt>작성자</dt><dd th:text="${dto.writer}"></dd>
+        <dt>내용</dt><dd th:text="${dto.content}"></dd>
+    </dl>
+    <div class="actions">
+        <a class="button" href="/board/selectAll">목록</a>
+        <a class="button" th:href="@{/board/update(id=${dto.postId})}">수정</a>
+        <form method="post" action="/board/delete">
+            <input type="hidden" name="id" th:value="${dto.postId}">
+            <input type="hidden" name="csrfToken" th:value="${csrfToken}">
+            <button class="danger">삭제</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

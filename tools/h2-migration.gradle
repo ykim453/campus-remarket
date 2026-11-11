@@ -1,0 +1,10 @@
+// One-off offline migration. Neither H2 nor this tool is packaged in bootJar.
+gradle.projectsEvaluated {
+    def app = gradle.rootProject
+    app.tasks.register('migrateH2ToMySQL', JavaExec) {
+        javaLauncher = app.javaToolchains.launcherFor(app.java.toolchain)
+        classpath = app.configurations.testRuntimeClasspath
+        mainClass = app.file('tools/H2ToMysql.java').absolutePath
+        workingDir = app.projectDir
+    }
+}

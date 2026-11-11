@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>게시글 등록·수정 · 캠퍼스 리마켓</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<nav th:replace="~{common/nav :: navigation}"></nav>
+<main>
+    <h1 th:text="${editing ? '게시글 수정' : '게시글 등록'}"></h1>
+    <form class="box edit-form" method="post" th:object="${dto}"
+          th:action="@{/board/{action}(action=${editing ? 'update' : 'insert'})}">
+        <input type="hidden" th:field="*{postId}">
+        <input type="hidden" name="csrfToken" th:value="${csrfToken}">
+        <label>분류
+            <select th:field="*{categoryId}" required>
+                <option value="">분류를 선택하세요</option>
+                <option th:each="category : ${categories}" th:value="${category.id}"
+                        th:text="${category.name}"></option>
+            </select>
+        </label>
+        <label>제목 <input type="text" th:field="*{title}" maxlength="150" required></label>
+        <label>내용 <textarea th:field="*{content}" maxlength="3000" required></textarea></label>
+        <button type="submit">저장</button>
+        <a href="/board/selectAll">취소</a>
+    </form>
+</main>
+</body>
+</html>

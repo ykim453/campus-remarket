@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.campus.remarket.dao.BoardDao">
+    <resultMap id="board" type="BoardDto">
+        <id property="postId" column="post_id"/>
+        <result property="schoolId" column="school_id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="writer" column="writer"/>
+        <result property="authorMemberId" column="author_member_id"/>
+        <result property="authorName" column="author_name"/>
+        <result property="schoolName" column="school_name"/>
+        <result property="commentCount" column="comment_count"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="regtime" column="regtime"/>
+    </resultMap>
+
+    <sql id="postWithCategory">
+        SELECT p.*, c.category_name,
+               (SELECT COUNT(*) FROM board_comments b WHERE b.post_id = p.post_id) AS comment_count
+        FROM board_posts p
+        JOIN board_categories c ON c.category_id = p.category_id
+    </sql>
+
+    <select id="selectAll" resultMap="board">
+        <include refid="postWithCategory"/>
+        <where>
+            <if test="schoolId != null">AND p.school_id = #{schoolId}</if>
+            <if test="categoryId != null">AND p.category_id = #{categoryId}</if>
+        </where>
+        ORDER BY p.post_id DESC
+    </select>
+
+    <select id="selectOne" resultMap="board">
+        <include refid="postWithCategory"/>
+        WHERE p.post_id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="BoardDto" useGeneratedKeys="true" keyProperty="postId">
+        INSERT INTO board_posts (
+            school_id, category_id, writer, title, content, author_member_id, author_name, school_name
+        ) VALUES (
+            #{schoolId}, #{categoryId}, #{writer}, #{title}, #{content},
+            #{authorMemberId}, #{authorName}, #{schoolName}
+        )
+    </insert>
+
+    <update id="update" parameterType="BoardDto">
+        UPDATE board_posts
+        SET category_id = #{categoryId}, title = #{title}, content = #{content}
+        WHERE post_id = #{postId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM board_posts WHERE post_id = #{id}
+    </delete>
+
+    <select id="categories" resultType="BoardCategory">
+        SELECT category_id AS id, category_name AS name FROM board_categories ORDER BY category_id
+    </select>
+
+    <select id="categoryExists" resultType="boolean">
+        SELECT COUNT(*) &gt; 0 FROM board_categories WHERE category_id = #{id}
+    </select>
+
+    <select id="comments" resultType="BoardCommentDto">
+        SELECT * FROM board_comments WHERE post_id = #{postId} ORDER BY comment_id
+    </select>
+
+    <select id="comment" resultType="BoardCommentDto">
+        SELECT * FROM board_comments WHERE comment_id = #{id}
+    </select>
+
+    <insert id="insertComment" parameterType="BoardCommentDto"
+            useGeneratedKeys="true" keyProperty="commentId">
+        INSERT INTO board_comments (post_id, member_id, author_name, school_name, content)
+        VALUES (#{postId}, #{memberId}, #{authorName}, #{schoolName}, #{content})
+    </insert>
+
+    <delete id="deleteComment">
+        DELETE FROM board_comments WHERE comment_id = #{id} AND member_id = #{memberId}
+    </delete>
+</mapper>

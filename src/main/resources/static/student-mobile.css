@@ -1,0 +1,312 @@
+/* Mobile-first refinements for the student marketplace. Existing interaction hooks stay unchanged. */
+:root {
+  --student-mobile-green: #24694f;
+  --student-mobile-soft: #f4f7f1;
+  --student-mobile-line: #dfe8df;
+}
+
+.search:focus-within {
+  border-color: #9bc0a7;
+  background: #fff;
+  box-shadow: 0 0 0 3px #24694f14;
+}
+
+#clear-search {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  color: #64776b;
+  font-size: 20px;
+  line-height: 1;
+}
+
+#clear-search:hover {
+  background: #eaf2e9;
+  color: var(--student-mobile-green);
+}
+
+#clear-search:focus-visible {
+  outline: 3px solid #91bda4;
+  outline-offset: 1px;
+}
+
+#results.grid {
+  column-gap: clamp(18px, 2.2vw, 26px);
+  row-gap: clamp(42px, 4vw, 56px);
+}
+
+#results.grid .product {
+  min-width: 0;
+}
+
+#results.grid .product h3 {
+  overflow: hidden;
+  line-height: 1.45;
+  min-height: 2.9em;
+}
+
+#results.grid .product .category-label {
+  min-height: 1.35em;
+}
+
+#results.grid .product .price-block {
+  min-height: 42px;
+}
+
+#results.grid .product .meta {
+  min-height: 3em;
+  line-height: 1.55;
+}
+
+.market-tools {
+  min-height: 44px;
+}
+
+.market-tools label {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--student-mobile-line);
+  border-radius: 12px;
+  background: var(--student-mobile-soft);
+}
+
+.market-tools label:focus-within {
+  border-color: #9bc0a7;
+  box-shadow: 0 0 0 3px #24694f14;
+}
+
+@media (max-width: 700px) {
+  .header-inner,
+  .main-nav,
+  main,
+  footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .header-inner {
+    gap: 12px;
+    padding-top: 18px;
+    padding-bottom: 16px;
+  }
+
+  .search {
+    min-height: 48px;
+    padding: 8px 10px 8px 13px;
+    border-radius: 13px;
+  }
+
+  .search input {
+    min-height: 30px;
+    font-size: 16px;
+  }
+
+  .search > span {
+    font-size: 23px;
+  }
+
+  .search small {
+    display: none;
+  }
+
+  #clear-search {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    align-items: stretch;
+    margin: 22px 0 16px;
+  }
+
+  .filters {
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding: 2px 2px 6px;
+    margin: 0 -2px;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filters button {
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 8px 14px;
+    border: 1px solid transparent;
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+
+  .filters button:not(.active) {
+    border-color: var(--student-mobile-line);
+    background: #fff;
+  }
+
+  .controls select {
+    width: 100%;
+    min-height: 44px;
+    padding: 0 36px 0 13px;
+    border: 1px solid var(--student-mobile-line);
+    border-radius: 12px;
+    background: #fff;
+    color: #426451;
+    font-size: 13px;
+  }
+
+  .market-tools {
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 0 16px;
+  }
+
+  .market-tools label {
+    flex: 1 1 210px;
+  }
+
+  #result-count {
+    margin-left: auto;
+    padding-right: 2px;
+    white-space: nowrap;
+  }
+
+  #results.grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+    row-gap: 48px;
+  }
+
+  #results.grid .product-art {
+    height: auto;
+    aspect-ratio: 1;
+    border-radius: 15px;
+  }
+
+  #results.grid .product h3 {
+    margin: 11px 3px 4px;
+    font-size: 13px;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  #results.grid .product .category-label,
+  #results.grid .product .price-block,
+  #results.grid .product .meta {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+
+  #results.grid .product .category-label {
+    margin-top: 10px;
+  }
+
+  #results.grid .product .price-block {
+    min-height: 45px;
+  }
+
+  #results.grid .product .meta {
+    min-height: 3.1em;
+    font-size: 10px;
+  }
+
+  #results.grid .product > .engagement-controls {
+    padding-top: 9px;
+  }
+
+  .exposure-guide {
+    margin-bottom: 26px;
+  }
+}
+
+@media (max-width: 420px) {
+  .header-inner,
+  .main-nav,
+  main,
+  footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  #results.grid {
+    column-gap: 14px;
+    row-gap: 44px;
+  }
+
+  #results.grid .product h3 {
+    font-size: 12px;
+  }
+
+  #results.grid .product .price {
+    font-size: 16px;
+  }
+
+  .market-tools label {
+    flex-basis: 100%;
+  }
+
+  #result-count {
+    margin-left: 2px;
+  }
+}
+
+@media (max-width: 700px) {
+  .calendar-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .calendar-actions p {
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: var(--student-mobile-soft);
+    color: #476254;
+  }
+
+  .calendar-actions .calendar-register {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    box-shadow: 0 5px 12px #24694f1f;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .calendar-actions .calendar-register:hover {
+    box-shadow: 0 6px 15px #24694f2b;
+  }
+
+  .calendar-actions .calendar-register:focus-visible {
+    outline: 3px solid #91bda4;
+    outline-offset: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-sheet,
+  .calendar-agenda {
+    padding: 16px 14px;
+  }
+
+  .calendar-actions p {
+    font-size: 12px;
+  }
+}

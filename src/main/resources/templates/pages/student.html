@@ -23,11 +23,11 @@
     <header>
       <div class="header-inner">
         <a class="brand" href="/"><b>R:</b><span>campus re:market<small>캠퍼스 리마켓</small></span></a>
-        <label class="search">
-          <span aria-hidden="true">⌕</span>
-          <input id="search" aria-label="검색" placeholder="이번 학기에 필요한 건 무엇인가요?">
-          <small>검색</small>
-        </label>
+          <label class="search" aria-label="캠퍼스 검색">
+            <span aria-hidden="true">⌕</span>
+            <input id="search" aria-label="검색" autocomplete="off" enterkeyhint="search" placeholder="이번 학기에 필요한 건 무엇인가요?">
+            <small>검색</small>
+          </label>
         <button id="location" hidden style="display:none" class="my-school" aria-label="내 학교">
           <span class="school-dot" aria-hidden="true"></span>
           내 학교
@@ -89,7 +89,7 @@
         </div>
         <div class="market-tools" id="market-tools">
           <label><input type="checkbox" id="discount-only"> 24시간 할인만 보기</label>
-          <span id="result-count"></span>
+          <span id="result-count" role="status" aria-live="polite"></span>
         </div>
         <details id="exposure-guide" class="exposure-guide">
           <summary>노출 순서 <b>최신 › 끌어올리기 › 판매 중(온도순) › 예약 중 › 거래 완료</b><span>안내 ⌄</span></summary>
@@ -133,6 +133,7 @@
     <link rel="stylesheet" href="/engagement.css?v=20261110-shop-photos">
     <script src="/engagement.js?v=20261103-seller-detail"></script>
     <link rel="stylesheet" href="/preview/profile.css?v=20261103-seller-detail">
+    <link rel="stylesheet" href="/student-mobile.css?v=20261119-mobile-ux">
     <script src="/preview/profile.js?v=20261103-seller-detail"></script>
     <script src="/campus-ui.js?v=20261104"></script>
   </body>

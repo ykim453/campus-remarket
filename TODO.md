@@ -26,7 +26,7 @@
 
 ## 회귀 검증 및 PR
 
-상태: 진행 중. Java 25 툴체인으로 `./gradlew test --no-daemon`을 통과했으며, 브랜치 커밋·원격 푸시·PR 생성을 마무리한다.
+상태: 완료. Java 25 툴체인으로 `./gradlew test --no-daemon`을 통과했고, `feat/mobile-student-ux` 브랜치를 원격에 푸시해 `main` 대상 PR을 생성했다.
 
 - 기존 Gradle 테스트와 변경 파일 정적 검사를 실행한다.
 - 변경사항을 `feat/mobile-student-ux` 브랜치에 커밋하고 원격에 푸시한다.
